@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import Button from './Button.vue'
 
 const logged = ref(false)
 const toggle = () => (logged.value = !logged.value)
@@ -11,16 +12,16 @@ const toggle = () => (logged.value = !logged.value)
     <div class="container">
       <div class="flex">
         <h1>
-          <a href="/">Vue<span class="red">Flix</span></a>
+          <RouterLink to="/">Vue<span class="red">Flix</span></RouterLink>
         </h1>
-        <nav>
+        <nav class="flex">
           <RouterLink to="/">Accueil</RouterLink>
           <RouterLink to="/a-propos">A propos</RouterLink>
-          <button @click="toggle" v-if="!logged">Connexion</button>
+          <Button @click="toggle" v-if="!logged" class="user-not-logged">Connexion</Button>
           <div v-else class="user-logged">
-            Fiorella
-            <img src="https://i.pravatar.cc/75?u=fiorella" alt="Fiorella" />
-            <button @click="toggle">X</button>
+            <strong>Fiorella</strong>
+            <img src="https://i.pravatar.cc/40?u=fiorella" alt="Fiorella" />
+            <Button @click="toggle">X</Button>
           </div>
         </nav>
       </div>
@@ -30,7 +31,7 @@ const toggle = () => (logged.value = !logged.value)
 
 <style scoped lang="scss">
 header {
-  background-color: $primary-color;
+  background-color: $secondary-color;
   padding: 16px 0;
 
   .flex {
@@ -39,6 +40,9 @@ header {
   }
 
   nav {
+    color: #fff;
+    align-items: center;
+
     a {
       color: #fff;
       padding: 0 8px;
@@ -54,11 +58,22 @@ h1 {
   }
 
   .red {
-    color: #f87171;
+    color: $primary-color;
   }
 }
 
 .user-logged {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 24px;
+  gap: 10px;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.user-not-logged {
+  margin-left: 40px;
 }
 </style>
