@@ -37,6 +37,13 @@ header {
     align-items: center;
     justify-content: space-between;
   }
+
+  nav {
+    a {
+      color: #fff;
+      padding: 0 8px;
+    }
+  }
 }
 
 h1 {
