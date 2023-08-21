@@ -10,7 +10,7 @@ const toggle = () => logged.value = !logged.value
   <nav>
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/a-propos">A propos</RouterLink>
-    <button @click="toggle" v-if="logged">Connexion</button>
+    <button @click="toggle" v-if="!logged">Connexion</button>
     <div v-else class="user-logged">
       Fiorella
       <img src="https://i.pravatar.cc/75?u=fiorella" alt="Fiorella">
