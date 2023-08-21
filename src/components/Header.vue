@@ -1,0 +1,26 @@
+<script setup>
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+
+const logged = ref(false)
+const toggle = () => logged.value = !logged.value
+</script>
+
+<template>
+  <nav>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/a-propos">A propos</RouterLink>
+    <button @click="toggle" v-if="logged">Connexion</button>
+    <div v-else class="user-logged">
+      Fiorella
+      <img src="https://i.pravatar.cc/75?u=fiorella" alt="Fiorella">
+      <button @click="toggle">X</button>
+    </div>
+  </nav>
+</template>
+
+<style scoped>
+.user-logged {
+  display: inline;
+}
+</style>
