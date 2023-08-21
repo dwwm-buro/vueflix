@@ -2,16 +2,18 @@
 defineProps(['user'])
 
 import Button from '../components/Button.vue'
-
-const isOpen = true;
 </script>
 
 <template>
   <div class="card">
-    <img :src="user.avatar" :alt="user.name" />
-    <h2>{{ user.name }}</h2>
-    <p>{{ user.job }}</p>
-    <Button>Voir biographie</Button>
+    <div>
+      <img :src="user.avatar" :alt="user.name" />
+      <h2>{{ user.name }}</h2>
+    </div>
+    <div>
+      <p class="job">{{ user.job }}</p>
+      <Button>Voir biographie</Button>
+    </div>
   </div>
 </template>
 
@@ -21,5 +23,27 @@ const isOpen = true;
   padding: 16px;
   border-radius: 10px;
   box-shadow: 0 1px 3px 0 #0000001a;
+  display: flex;
+  align-items: center;
+
+  div {
+    width: 50%;
+    text-align: center;
+
+    img {
+      border-radius: 50%;
+      max-width: 128px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 5px;
+    }
+
+    .job {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+  }
 }
 </style>

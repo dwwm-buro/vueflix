@@ -39,14 +39,27 @@ const team = ref([
 </template>
 
 <style scoped lang="scss">
-$itemNumber: 3;
+$desktopNumber: 3;
+$tabletNumber: 2;
 
 .flex {
   gap: 30px;
   flex-wrap: wrap;
 
   .card {
-    width: calc(100% / $itemNumber - (30px * ($itemNumber - 1) / $itemNumber));
+    width: calc(100% / $desktopNumber - (30px * ($desktopNumber - 1) / $desktopNumber));
+  }
+
+  @media (max-width: 1023px) {
+    .card {
+      width: calc(100% / $tabletNumber - (30px * ($tabletNumber - 1) / $tabletNumber));
+    }
+  }
+
+  @media (max-width: 639px) {
+    .card {
+      width: 100%;
+    }
   }
 }
 </style>
