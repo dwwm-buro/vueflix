@@ -11,9 +11,7 @@ const toggle = () => (logged.value = !logged.value)
     <div class="container">
       <div class="flex">
         <h1>
-          <a href="/">
-            Vue<span class="red">Flix</span>
-          </a>
+          <a href="/">Vue<span class="red">Flix</span></a>
         </h1>
         <nav>
           <RouterLink to="/">Accueil</RouterLink>
