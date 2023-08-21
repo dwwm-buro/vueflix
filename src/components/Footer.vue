@@ -10,3 +10,12 @@ const movieCount = 24686
     </p>
   </footer>
 </template>
+
+<style scoped lang="scss">
+footer {
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #d1d5db;
+  padding: 48px 0;
+}
+</style>
