@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   background-color: $color;
   font-family: $font-family;
@@ -14,4 +18,16 @@ body {
 .container {
   max-width: 1280px;
   margin: auto;
+  padding: 0 12px;
+}
+
+.flex {
+  display: flex;
+}
+
+.title {
+  text-align: center;
+  font-weight: 700;
+  margin: 48px 0;
+  font-size: 36px;
 }
