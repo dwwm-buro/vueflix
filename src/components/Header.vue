@@ -7,19 +7,27 @@ const toggle = () => (logged.value = !logged.value)
 </script>
 
 <template>
-  <nav>
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/a-propos">A propos</RouterLink>
-    <button @click="toggle" v-if="!logged">Connexion</button>
-    <div v-else class="user-logged">
-      Fiorella
-      <img src="https://i.pravatar.cc/75?u=fiorella" alt="Fiorella" />
-      <button @click="toggle">X</button>
+  <header>
+    <div class="container">
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/a-propos">A propos</RouterLink>
+        <button @click="toggle" v-if="!logged">Connexion</button>
+        <div v-else class="user-logged">
+          Fiorella
+          <img src="https://i.pravatar.cc/75?u=fiorella" alt="Fiorella" />
+          <button @click="toggle">X</button>
+        </div>
+      </nav>
     </div>
-  </nav>
+  </header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+header {
+  background-color: $primary-color;
+}
+
 .user-logged {
   display: inline;
 }

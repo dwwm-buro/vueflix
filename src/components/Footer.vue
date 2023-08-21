@@ -4,7 +4,7 @@ const movieCount = 24686
 </script>
 
 <template>
-  <footer>
+  <footer class="container">
     <p>
       Copyright &copy; {{ year }}. Catalogue de <strong>{{ movieCount }}</strong> films.
     </p>
