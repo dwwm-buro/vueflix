@@ -1,0 +1,70 @@
+<script setup>
+defineProps(['movie'])
+import dayjs from 'dayjs'
+import 'dayjs/locale/fr'
+
+dayjs.locale('fr')
+</script>
+
+<template>
+  <div class="card">
+    <div class="content">
+      <div>
+        <RouterLink :to="`/films/`">
+          <img :src="movie.poster_path" :alt="movie.title" />
+        </RouterLink>
+      </div>
+      <div class="card-content">
+        <h2>
+          <RouterLink :to="`/films/`">{{ movie.title }}</RouterLink>
+        </h2>
+        <p class="movie-date">{{ dayjs(movie.release_date).format('DD MMMM YYYY') }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.card {
+  margin-bottom: 20px;
+
+  .content {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 #0000001a;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    img {
+      height: 350px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+      display: block;
+    }
+
+    .card-content {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+
+      h2 {
+        font-size: 16px;
+        
+        a {
+          color: #000;
+        }
+      }
+
+      .movie-date {
+        color: #9ca3af;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+</style>
