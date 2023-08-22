@@ -1,12 +1,19 @@
 <script setup>
+import { ref } from 'vue'
+import { countMovies } from '../api'
+
 const year = new Date().getFullYear()
-const movieCount = 24686
+const movieCount = ref(0)
+countMovies().then((length) => (movieCount.value = length))
 </script>
 
 <template>
   <footer class="container">
     <p>
-      Copyright &copy; {{ year }}. Catalogue de <strong>{{ movieCount }}</strong> films.
+      Copyright &copy; {{ year }}.
+      <span v-if="movieCount > 0">
+        Catalogue de <strong>{{ movieCount }}</strong> films.
+      </span>
     </p>
   </footer>
 </template>
