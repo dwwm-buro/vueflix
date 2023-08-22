@@ -1,7 +1,13 @@
 <script setup>
-defineProps(['user'])
-
+import { ref } from 'vue';
 import Button from '../components/Button.vue'
+
+const props = defineProps(['user'])
+
+const open = ref(false)
+const toggleBiography = () => {
+  open.value = !open.value
+}
 </script>
 
 <template>
@@ -12,7 +18,8 @@ import Button from '../components/Button.vue'
     </div>
     <div>
       <p class="job">{{ user.job }}</p>
-      <Button>Voir biographie</Button>
+      <Button @click="toggleBiography" v-if="!open">Voir biographie</Button>
+      <p v-if="open">{{ user.biography }}</p>
     </div>
   </div>
 </template>

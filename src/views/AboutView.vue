@@ -34,7 +34,11 @@ const team = ref([
   <h1 class="title">A propos</h1>
 
   <div class="flex">
-    <Card v-for="user in team" :key="user.id" :user="user" />
+    <Card
+      v-for="user in team"
+      :key="user.id"
+      :user="user"
+    />
   </div>
 </template>
 
