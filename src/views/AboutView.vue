@@ -35,6 +35,8 @@ const selected = ref(null)
   <h1 class="title">A propos</h1>
 
   <div class="flex">
+    <!-- Le $event représente le props.user envoyé
+    par le emit dans le composant Card -->
     <Card
       v-for="user in team"
       :key="user.id"
