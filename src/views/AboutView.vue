@@ -28,6 +28,7 @@ const team = ref([
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam mollitia voluptatum sunt placeat aliquam iusto exercitationem at? Vel itaque porro quis saepe quod soluta alias facere eum deleniti? Rem, eveniet.'
   }
 ])
+const selected = ref(null)
 </script>
 
 <template>
@@ -38,6 +39,8 @@ const team = ref([
       v-for="user in team"
       :key="user.id"
       :user="user"
+      @opened="selected = $event.id"
+      :open="selected === user.id"
     />
   </div>
 </template>

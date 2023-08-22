@@ -1,12 +1,14 @@
 <script setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import Button from '../components/Button.vue'
 
-const props = defineProps(['user'])
+const props = defineProps(['user', 'open'])
+const emit = defineEmits(['opened'])
 
-const open = ref(false)
+// const open = ref(false)
 const toggleBiography = () => {
-  open.value = !open.value
+  // open.value = !open.value
+  emit('opened', props.user)
 }
 </script>
 
