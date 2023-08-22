@@ -5,7 +5,7 @@ import { onBeforeMount, ref } from 'vue'
 const movies = ref([])
 const loading = ref(true)
 // Mode asynchrone
-$fetch('https://api.vueflix.boxydev.com/movies').then(response => {
+$fetch('https://api.vueflix.boxydev.com/movies').then((response) => {
   setTimeout(() => {
     movies.value = response
     loading.value = false
@@ -13,7 +13,7 @@ $fetch('https://api.vueflix.boxydev.com/movies').then(response => {
 })
 
 // Mode synchrone
-const genres = ref([]);
+const genres = ref([])
 onBeforeMount(async () => {
   genres.value = await $fetch('https://api.vueflix.boxydev.com/genres')
 })

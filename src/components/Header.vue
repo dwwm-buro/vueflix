@@ -16,6 +16,7 @@ const toggle = () => (logged.value = !logged.value)
         </h1>
         <nav class="flex">
           <RouterLink to="/">Accueil</RouterLink>
+          <RouterLink to="/films">Films</RouterLink>
           <RouterLink to="/a-propos">A propos</RouterLink>
           <Button @click="toggle" v-if="!logged" class="user-not-logged">Connexion</Button>
           <div v-else class="user-logged">
