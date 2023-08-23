@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { getMovies } from '../api'
-import MovieCard from '../components/MovieCard.vue'
+import Button from '../components/Button.vue'
 import Loader from '../components/Loader.vue'
+import MovieCard from '../components/MovieCard.vue'
 
+const page = ref(1)
 const movies = ref([])
 const loading = ref(true)
 getMovies().then((response) => {
@@ -12,13 +14,31 @@ getMovies().then((response) => {
     loading.value = false
   }, 1500)
 })
+
+const loadMore = () => {
+  loading.value = true
+
+  getMovies(++page.value).then((response) => {
+    setTimeout(() => {
+      movies.value = [ ...movies.value, ...response ]
+      loading.value = false
+    }, 1500)
+  })
+}
 </script>
 
 <template>
   <h1 class="title">Films</h1>
 
-  <div class="flex" v-if="!loading">
-    <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+  <div v-if="!loading || movies.length > 0">
+    <div class="flex">
+      <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+    </div>
+
+    <div class="button-container">
+      <Button @click="loadMore" v-if="!loading && page < 4">Voir plus</Button>
+      <Loader v-if="loading" message="Des films en plus" />
+    </div>
   </div>
 
   <div v-else>
@@ -27,6 +47,16 @@ getMovies().then((response) => {
 </template>
 
 <style scoped lang="scss">
+.button-container {
+  text-align: center;
+
+  button {
+    font-size: 22px;
+    padding: 10px 30px;
+    margin-top: 20px;
+  }
+}
+
 .flex {
   flex-wrap: wrap;
   margin: 0 -10px;

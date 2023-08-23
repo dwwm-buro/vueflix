@@ -6,6 +6,6 @@ export const countMovies = () => {
   return getMovies().then((response) => response.length)
 }
 
-export const getMovies = () => {
-  return $fetch(`${url}/movies`)
+export const getMovies = (page = 1) => {
+  return $fetch(`${url}/movies?_page=${page}&_limit=10`)
 }
