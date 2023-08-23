@@ -17,4 +17,4 @@ export const getMovie = (id) => {
   return api(`/movies/${id}?_expand=genre&_expand=actors`)
 }
 
-export { dayjs };
+export { dayjs }

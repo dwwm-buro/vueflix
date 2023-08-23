@@ -7,7 +7,7 @@ import Note from '../components/Note.vue'
 
 const route = useRoute()
 const movie = ref({})
-getMovie(route.params.id).then(response => {
+getMovie(route.params.id).then((response) => {
   movie.value = response
 })
 
@@ -27,11 +27,7 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
     <div class="movie-background" :style="{ backgroundColor: `rgba(${color}, 0.75)` }">
       <div class="container">
         <div class="flex movie-background-content">
-          <img
-            :src="movie.poster_path"
-            :alt="movie.title"
-            class="movie-poster"
-          />
+          <img :src="movie.poster_path" :alt="movie.title" class="movie-poster" />
           <div class="movie-content flex">
             <h1>
               {{ movie.title }}
@@ -90,11 +86,7 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
         class="card"
       >
         <div class="content">
-          <img
-            :src="actor.profile_path"
-            :alt="actor.name"
-            class="actor-image"
-          />
+          <img :src="actor.profile_path" :alt="actor.name" class="actor-image" />
           <div class="card-content">
             <h2>{{ actor.name }} ({{ age(actor.birthday) }} ans)</h2>
             <p>{{ actor.character }}</p>
@@ -184,6 +176,7 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
 
 .actor-list {
   flex-wrap: wrap;
+  margin: 0 -10px;
 
   .card {
     width: 20%;
