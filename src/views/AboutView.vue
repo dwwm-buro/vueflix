@@ -32,18 +32,20 @@ const selected = ref(null)
 </script>
 
 <template>
-  <h1 class="title">A propos</h1>
+  <div class="container">
+    <h1 class="title">A propos</h1>
 
-  <div class="flex">
-    <!-- Le $event représente le props.user envoyé
-    par le emit dans le composant Card -->
-    <Card
-      v-for="user in team"
-      :key="user.id"
-      :user="user"
-      @opened="selected = $event.id"
-      :open="selected === user.id"
-    />
+    <div class="flex">
+      <!-- Le $event représente le props.user envoyé
+      par le emit dans le composant Card -->
+      <Card
+        v-for="user in team"
+        :key="user.id"
+        :user="user"
+        @opened="selected = $event.id"
+        :open="selected === user.id"
+      />
+    </div>
   </div>
 </template>
 

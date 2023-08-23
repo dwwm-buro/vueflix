@@ -20,8 +20,10 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <h1 class="title">Accueil</h1>
-  <p v-if="loading">Chargement en cours...</p>
-  {{ movies }}
-  {{ genres }}
+  <div class="container">
+    <h1 class="title">Accueil</h1>
+    <p v-if="loading">Chargement en cours...</p>
+    {{ movies }}
+    {{ genres }}
+  </div>
 </template>

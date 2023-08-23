@@ -28,21 +28,23 @@ const loadMore = () => {
 </script>
 
 <template>
-  <h1 class="title">Films</h1>
+  <div class="container">
+    <h1 class="title">Films</h1>
 
-  <div v-if="!loading || movies.length > 0">
-    <div class="flex">
-      <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+    <div v-if="!loading || movies.length > 0">
+      <div class="flex">
+        <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+      </div>
+
+      <div class="button-container">
+        <Button @click="loadMore" v-if="!loading && page < 4">Voir plus</Button>
+        <Loader v-if="loading" message="Des films en plus" />
+      </div>
     </div>
 
-    <div class="button-container">
-      <Button @click="loadMore" v-if="!loading && page < 4">Voir plus</Button>
-      <Loader v-if="loading" message="Des films en plus" />
+    <div v-else>
+      <Loader message="On charge les films" />
     </div>
-  </div>
-
-  <div v-else>
-    <Loader message="On charge les films" />
   </div>
 </template>
 
