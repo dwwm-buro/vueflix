@@ -13,4 +13,8 @@ export const getMovies = (page = 1) => {
   return api(`/movies?_page=${page}&_limit=10`)
 }
 
+export const getMovie = (id) => {
+  return api(`/movies/${id}?_expand=genre&_expand=actors`)
+}
+
 export { dayjs };

@@ -8,14 +8,14 @@ import Note from './Note.vue'
   <div class="card">
     <div class="content">
       <div class="image-container">
-        <RouterLink :to="`/films/`">
+        <RouterLink :to="`/films/${movie.id}`">
           <img :src="movie.poster_path" :alt="movie.title" />
         </RouterLink>
         <Note :note="movie.vote_average" />
       </div>
       <div class="card-content">
         <h2>
-          <RouterLink :to="`/films/`">{{ movie.title }}</RouterLink>
+          <RouterLink :to="{ name: 'movie', params: { id: movie.id } }">{{ movie.title }}</RouterLink>
         </h2>
         <p class="movie-date">{{ dayjs(movie.release_date).format('DD MMMM YYYY') }}</p>
       </div>
