@@ -16,6 +16,7 @@ const loadDots = () => {
   timeout = setTimeout(() => loadDots(), 200)
 }
 
+// Quand le loader disparait, on supprime le settimeout
 onBeforeUnmount(() => clearTimeout(timeout))
 
 loadDots()

@@ -20,7 +20,7 @@ const loadMore = () => {
 
   getMovies(++page.value).then((response) => {
     setTimeout(() => {
-      movies.value = [ ...movies.value, ...response ]
+      movies.value = [ ...movies.value, ...response ] // Fusion des tableaux
       loading.value = false
     }, 1500)
   })
