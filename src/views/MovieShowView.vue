@@ -19,6 +19,7 @@ const duration = computed(() => {
   return `${hours}h${minutes < 10 ? 0 : ''}${minutes}`
 })
 const color = ref([0, 0, 0])
+const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFullYear() - 1970
 </script>
 
 <template>
@@ -71,6 +72,32 @@ const color = ref([0, 0, 0])
               <h3 class="movie-synopsis-title">Synopsis</h3>
               <p>{{ movie.overview }}</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="casting-title">Casting</h2>
+
+    <div class="flex actor-list">
+      <div
+        v-for="actor in movie?.actors
+          ?.filter((actor) => actor.profile_path)
+          .sort((actorA, actorB) => (actorA.order > actorB.order ? 1 : -1))"
+        :key="actor.id"
+        class="card"
+      >
+        <div class="content">
+          <img
+            :src="actor.profile_path"
+            :alt="actor.name"
+            class="actor-image"
+          />
+          <div class="card-content">
+            <h2>{{ actor.name }} ({{ age(actor.birthday) }} ans)</h2>
+            <p>{{ actor.character }}</p>
           </div>
         </div>
       </div>
@@ -148,6 +175,57 @@ const color = ref([0, 0, 0])
 
   @media (max-width: 767px) {
     margin-bottom: 40px;
+  }
+}
+
+.casting-title {
+  margin: 30px 0 15px 0;
+}
+
+.actor-list {
+  flex-wrap: wrap;
+
+  .card {
+    width: 20%;
+
+    @media (max-width: 1023px) {
+      width: 25%;
+    }
+
+    @media (max-width: 767px) {
+      width: 50%;
+    }
+
+    @media (max-width: 639px) {
+      width: 100%;
+    }
+  }
+}
+
+.content {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px 0 #0000001a;
+  margin: 0 10px;
+  height: 100%;
+
+  .actor-image {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card-content {
+    padding: 12px;
+
+    h2 {
+      font-size: 16px;
+    }
+
+    p {
+      color: #9ca3af;
+    }
   }
 }
 </style>
