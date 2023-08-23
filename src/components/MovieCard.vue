@@ -1,21 +1,24 @@
 <script setup>
 defineProps(['movie'])
 import { dayjs } from '../api'
+import slugify from 'slugify'
 import Note from './Note.vue'
+
+const slug = (title) => slugify(title, { lower: true })
 </script>
 
 <template>
   <div class="card">
     <div class="content">
       <div class="image-container">
-        <RouterLink :to="`/films/${movie.id}`">
+        <RouterLink :to="`/films/${movie.id}-${slug(movie.title)}`">
           <img :src="movie.poster_path" :alt="movie.title" />
         </RouterLink>
         <Note :note="movie.vote_average" />
       </div>
       <div class="card-content">
         <h2>
-          <RouterLink :to="{ name: 'movie', params: { id: movie.id } }">
+          <RouterLink :to="{ name: 'movie', params: { id: movie.id, slug: slug(movie.title) } }">
             {{ movie.title }}
           </RouterLink>
         </h2>
