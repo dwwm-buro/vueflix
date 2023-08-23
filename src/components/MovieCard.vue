@@ -87,7 +87,6 @@ const note = (note) => Math.ceil(note * 10)
       width: 100%;
       object-fit: cover;
       border-radius: 10px 10px 0 0;
-      display: block;
     }
 
     .card-content {
