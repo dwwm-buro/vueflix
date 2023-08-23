@@ -1,9 +1,6 @@
 <script setup>
 defineProps(['movie'])
-import dayjs from 'dayjs'
-import 'dayjs/locale/fr'
-
-dayjs.locale('fr')
+import { dayjs } from '../api'
 
 const note = (note) => Math.ceil(note * 10)
 </script>
