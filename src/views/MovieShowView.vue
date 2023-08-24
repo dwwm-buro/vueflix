@@ -17,9 +17,9 @@ const send = (event) => {
   event.preventDefault()
 
   // Ajoute le commentaire dans l'API puis récupère la liste des coms à jours
-  postComment(movie.value.id, newComment.value.message).then(
-    () => getComments(movie.value.id)
-  ).then((response) => (comments.value = response))
+  postComment(movie.value.id, newComment.value.message)
+    .then(() => getComments(movie.value.id))
+    .then((response) => (comments.value = response))
 
   newComment.value.message = ''
 }
@@ -33,8 +33,12 @@ const send = (event) => {
   })
   .then((response) => (comments.value = response)) */
 
-const { data: movie, loading: loadingMovie } = useFetch(`/movies/${route.params.id}?_expand=genre&_expand=actors`)
-const { data: comments, loading: loadingComments } = useFetch(`/movies/${route.params.id}/comments?_expand=user`)
+const { data: movie, loading: loadingMovie } = useFetch(
+  `/movies/${route.params.id}?_expand=genre&_expand=actors`
+)
+const { data: comments, loading: loadingComments } = useFetch(
+  `/movies/${route.params.id}/comments?_expand=user`
+)
 
 const showModal = ref(false)
 const color = ref([0, 0, 0])
@@ -143,7 +147,10 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
           class="comment"
         >
           <div class="comment-header">
-            <img :src="`https://i.pravatar.cc/50?u=${comment.user.email}`" :alt="comment.user.name" />
+            <img
+              :src="`https://i.pravatar.cc/50?u=${comment.user.email}`"
+              :alt="comment.user.name"
+            />
             <p>
               Écrit par <strong>{{ comment.user.name }}</strong> le
               {{ dayjs(comment.createdAt).format('DD MMMM YYYY à HH:mm') }}

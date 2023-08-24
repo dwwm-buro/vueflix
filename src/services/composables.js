@@ -10,9 +10,9 @@ export const useFetch = (url) => {
     loading.value = true
 
     api(url)
-      .then(response => data.value = response)
-      .catch(reason => errors.value = reason)
-      .finally(() => loading.value = false)
+      .then((response) => (data.value = response))
+      .catch((reason) => (errors.value = reason))
+      .finally(() => (loading.value = false))
   }
 
   loadData()
