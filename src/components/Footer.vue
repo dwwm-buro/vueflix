@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { countMovies } from '../api'
+import { countMovies } from '@/services/api'
 
 const year = new Date().getFullYear()
 const movieCount = ref(0)

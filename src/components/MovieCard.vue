@@ -1,6 +1,6 @@
 <script setup>
 defineProps(['movie'])
-import { dayjs } from '../api'
+import { dayjs } from '@/services/api'
 import slugify from 'slugify'
 import Note from './Note.vue'
 

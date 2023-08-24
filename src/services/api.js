@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
 dayjs.locale('fr')
 
-const api = $fetch.create({ baseURL: 'http://localhost:3000' })
+export const api = $fetch.create({ baseURL: 'http://localhost:3000' })
 
 export const countMovies = () => {
   return getMovies().then((response) => response.length)

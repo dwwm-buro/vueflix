@@ -1,6 +1,6 @@
 <script setup>
 // import { ref } from 'vue';
-import Button from '../components/Button.vue'
+import Button from './Button.vue'
 
 const props = defineProps(['user', 'open'])
 const emit = defineEmits(['opened'])

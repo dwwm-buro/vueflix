@@ -1,8 +1,7 @@
-import { $fetch } from 'ohmyfetch'
 import { ref } from 'vue'
+import { api } from './api'
 
 export const useFetch = (url) => {
-  const api = $fetch.create({ baseURL: 'http://localhost:3000' })
   const data = ref(null)
   const errors = ref(null)
   const loading = ref(false)

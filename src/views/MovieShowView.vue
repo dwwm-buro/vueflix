@@ -1,12 +1,12 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { dayjs, getMovie, getComments, postComment } from '../api'
-import { useFetch } from '../composables'
+import { dayjs, getMovie, getComments, postComment } from '@/services/api'
+import { useFetch } from '@/services/composables'
 import { computed, ref } from 'vue'
-import Button from '../components/Button.vue'
-import Modal from '../components/Modal.vue'
-import Note from '../components/Note.vue'
-import Loader from '../components/Loader.vue'
+import Button from '@/components/Button.vue'
+import Modal from '@/components/Modal.vue'
+import Note from '@/components/Note.vue'
+import Loader from '@/components/Loader.vue'
 
 const route = useRoute()
 // const movie = ref({})

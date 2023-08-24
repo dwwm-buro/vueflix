@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import { getMovies } from '../api'
-import Button from '../components/Button.vue'
-import Loader from '../components/Loader.vue'
-import MovieCard from '../components/MovieCard.vue'
+import { getMovies } from '@/services/api'
+import Button from '@/components/Button.vue'
+import Loader from '@/components/Loader.vue'
+import MovieCard from '@/components/MovieCard.vue'
 
 const page = ref(1)
 const movies = ref([])
