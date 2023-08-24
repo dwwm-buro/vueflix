@@ -21,8 +21,8 @@ const route = useRoute()
   })
   .then((response) => (comments.value = response)) */
 
-const { data: movie, loading } = useFetch(`/movies/${route.params.id}?_expand=genre&_expand=actors`)
-const { data: comments } = useFetch(`/movies/${route.params.id}/comments?_expand=user`)
+const { data: movie, loading: loadingMovie } = useFetch(`/movies/${route.params.id}?_expand=genre&_expand=actors`)
+const { data: comments, loading: loadingComments } = useFetch(`/movies/${route.params.id}/comments?_expand=user`)
 
 const showModal = ref(false)
 const color = ref([0, 0, 0])
@@ -37,7 +37,7 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
 </script>
 
 <template>
-  <div v-if="!loading">
+  <div v-if="!loadingMovie && !loadingComments">
     <div class="movie-show" :style="{ backgroundImage: `url(${movie.backdrop_path})` }">
       <div class="movie-background" :style="{ backgroundColor: `rgba(${color}, 0.75)` }">
         <div class="container">
@@ -134,7 +134,7 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
   </div>
 
   <div v-else>
-    <Loader v-if="loading" message="Le film arrive" />
+    <Loader message="Le film arrive" />
   </div>
 
   <Teleport to="body">
