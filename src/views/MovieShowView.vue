@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router'
 import { getMovie } from '../api'
 import { computed, ref } from 'vue'
 import { dayjs } from '../api'
+import Modal from '../components/Modal.vue'
 import Note from '../components/Note.vue'
 
 const route = useRoute()
@@ -11,6 +12,8 @@ getMovie(route.params.id).then((response) => {
   movie.value = response
 })
 
+const showModal = ref(false)
+const color = ref([0, 0, 0])
 const year = computed(() => new Date(movie.value.release_date).getFullYear())
 const duration = computed(() => {
   const hours = Math.floor(movie.value.runtime / 60)
@@ -18,7 +21,6 @@ const duration = computed(() => {
 
   return `${hours}h${minutes < 10 ? 0 : ''}${minutes}`
 })
-const color = ref([0, 0, 0])
 const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFullYear() - 1970
 </script>
 
@@ -95,6 +97,20 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
       </div>
     </div>
   </div>
+
+  <Teleport to="body">
+    <Modal :show="showModal" @close="showModal = false">
+      <iframe
+        width="100%"
+        height="500"
+        :src="`https://www.youtube.com/embed/${movie.youtube}`"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </Modal>
+  </Teleport>
 </template>
 
 <style scoped lang="scss">
