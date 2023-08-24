@@ -1,16 +1,20 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { getMovie } from '../api'
+import { dayjs, getMovie, getComments } from '../api'
 import { computed, ref } from 'vue'
-import { dayjs } from '../api'
 import Modal from '../components/Modal.vue'
 import Note from '../components/Note.vue'
 
 const route = useRoute()
 const movie = ref({})
+const comments = ref([])
+
+// Une promesse peut retourner une promesse
 getMovie(route.params.id).then((response) => {
   movie.value = response
-})
+
+  return getComments(movie.value.id)
+}).then((response) => comments.value = response)
 
 const showModal = ref(false)
 const color = ref([0, 0, 0])
@@ -77,7 +81,7 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
   </div>
 
   <div class="container">
-    <h2 class="casting-title">Casting</h2>
+    <h2 class="section-title">Casting</h2>
 
     <div class="flex actor-list">
       <div
@@ -98,8 +102,34 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
     </div>
   </div>
 
+  <div class="container">
+    <h2 class="section-title">Commentaires ({{ comments.length }})</h2>
+
+    <div class="comments">
+      <div
+        v-for="comment in comments.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))"
+        :key="comment.id"
+        class="comment"
+      >
+        <div class="comment-header">
+          <img
+            :src="`https://i.pravatar.cc/50?u=${comment.user.email}`"
+            :alt="comment.user.name"
+          />
+          <p>
+            Écrit par <strong>{{ comment.user.name }}</strong> le
+            {{ dayjs(comment.createdAt).format('DD MMMM YYYY à HH:mm') }}
+          </p>
+        </div>
+        <p>{{ comment.message }}</p>
+      </div>
+    </div>
+  </div>
+
   <Teleport to="body">
     <Modal :show="showModal" @close="showModal = false">
+      <template #header>Super vidéo de {{ movie.title }}</template>
+
       <iframe
         width="100%"
         height="500"
@@ -186,7 +216,7 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
   }
 }
 
-.casting-title {
+.section-title {
   margin: 30px 0 15px 0;
 }
 
@@ -234,6 +264,34 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
 
     p {
       color: #9ca3af;
+    }
+  }
+}
+
+.comments {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px 0 #0000001a;
+
+  .comment {
+    border-top: 1px solid #e5e7eb;
+    padding: 15px;
+
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+
+      img {
+        border-radius: 50%;
+        width: 40px;
+      }
+
+      p {
+        font-size: 14px;
+        color: #8a8f98;
+      }
     }
   }
 }

@@ -17,4 +17,8 @@ export const getMovie = (id) => {
   return api(`/movies/${id}?_expand=genre&_expand=actors`)
 }
 
+export const getComments = (id) => {
+  return api(`/movies/${id}/comments?_expand=user`)
+}
+
 export { dayjs }
