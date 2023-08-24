@@ -2,9 +2,12 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import Button from './Button.vue'
+import { useUserStore } from '@/stores/user'
 
-const logged = ref(false)
-const toggle = () => (logged.value = !logged.value)
+// const logged = ref(false)
+// const toggle = () => (logged.value = !logged.value)
+
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -18,11 +21,16 @@ const toggle = () => (logged.value = !logged.value)
           <RouterLink to="/">Accueil</RouterLink>
           <RouterLink to="/films">Films</RouterLink>
           <RouterLink to="/a-propos">A propos</RouterLink>
-          <Button @click="toggle" v-if="!logged" class="user-not-logged">Connexion</Button>
+          <Button
+            @click="userStore.login('Fiorella')"
+            v-if="!userStore.logged"
+            class="user-not-logged"
+            >Connexion</Button
+          >
           <div v-else class="user-logged">
-            <strong>Fiorella</strong>
-            <img src="https://i.pravatar.cc/40?u=fiorella" alt="Fiorella" />
-            <Button @click="toggle">X</Button>
+            <strong>{{ userStore.user?.username }}</strong>
+            <img :src="userStore.avatar" :alt="userStore.user?.username" />
+            <Button @click="userStore.logout">X</Button>
           </div>
         </nav>
       </div>
