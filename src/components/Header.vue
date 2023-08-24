@@ -22,7 +22,7 @@ const userStore = useUserStore()
           <RouterLink to="/films">Films</RouterLink>
           <RouterLink to="/a-propos">A propos</RouterLink>
           <Button
-            @click="userStore.login('Fiorella')"
+            @click="userStore.fakeLogin('Fiorella')"
             v-if="!userStore.logged"
             class="user-not-logged"
             >Connexion</Button

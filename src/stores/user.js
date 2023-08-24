@@ -9,7 +9,7 @@ export const useUserStore = defineStore('user', {
     }
   },
   actions: {
-    login(username) {
+    fakeLogin(username) {
       this.user = { username }
     },
     logout() {
