@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { dayjs, getMovie, getComments } from '../api'
+import { dayjs, getMovie, getComments, postComment } from '../api'
 import { useFetch } from '../composables'
 import { computed, ref } from 'vue'
 import Button from '../components/Button.vue'
@@ -11,6 +11,18 @@ import Loader from '../components/Loader.vue'
 const route = useRoute()
 // const movie = ref({})
 // const comments = ref([])
+const newComment = ref({ message: '' })
+
+const send = (event) => {
+  event.preventDefault()
+
+  // Ajoute le commentaire dans l'API puis récupère la liste des coms à jours
+  postComment(movie.value.id, newComment.value.message).then(
+    () => getComments(movie.value.id)
+  ).then((response) => (comments.value = response))
+
+  newComment.value.message = ''
+}
 
 // Une promesse peut retourner une promesse
 /* getMovie(route.params.id)
@@ -113,6 +125,16 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
 
     <div class="container">
       <h2 class="section-title">Commentaires ({{ comments.length }})</h2>
+
+      <div class="comment-form">
+        <h2>Ajouter un commentaire</h2>
+        <form>
+          <div>
+            <textarea v-model="newComment.message"></textarea>
+          </div>
+          <Button :disabled="!newComment.message.trim()" @click="send">Envoyer</Button>
+        </form>
+      </div>
 
       <div class="comments">
         <div
@@ -276,6 +298,30 @@ const age = (date) => new Date(Date.now() - new Date(date).getTime()).getUTCFull
     p {
       color: #9ca3af;
     }
+  }
+}
+
+.comment-form {
+  width: 50%;
+  margin: 20px auto;
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 20px 0;
+  }
+
+  textarea {
+    width: 100%;
+    border-color: lightgray;
+    border-radius: 10px;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
   }
 }
 

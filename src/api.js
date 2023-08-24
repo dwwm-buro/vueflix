@@ -21,4 +21,11 @@ export const getComments = (id) => {
   return api(`/movies/${id}/comments?_expand=user`)
 }
 
+export const postComment = (id, message) => {
+  return api(`/movies/${id}/comments`, {
+    method: 'POST',
+    body: { message, userId: 1 }
+  })
+}
+
 export { dayjs }
