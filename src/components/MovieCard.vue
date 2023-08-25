@@ -2,9 +2,12 @@
 defineProps(['movie'])
 import { dayjs } from '@/services/api'
 import slugify from 'slugify'
+import Button from './Button.vue'
 import Note from './Note.vue'
+import { useCartStore } from '@/stores/cart'
 
 const slug = (title) => slugify(title, { lower: true })
+const store = useCartStore()
 </script>
 
 <template>
@@ -23,6 +26,8 @@ const slug = (title) => slugify(title, { lower: true })
           </RouterLink>
         </h2>
         <p class="movie-date">{{ dayjs(movie.release_date).format('DD MMMM YYYY') }}</p>
+        <Button @click="store.add(movie)" v-if="!store.has(movie)">Ajouter au panier</Button>
+        <Button @click="store.delete(movie)" v-if="store.has(movie)">Retirer du panier</Button>
       </div>
     </div>
   </div>

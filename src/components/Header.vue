@@ -3,11 +3,13 @@ import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import Button from './Button.vue'
 import { useUserStore } from '@/stores/user'
+import { useCartStore } from '@/stores/cart'
 
 // const logged = ref(false)
 // const toggle = () => (logged.value = !logged.value)
 
 const userStore = useUserStore()
+const cartStore = useCartStore()
 </script>
 
 <template>
@@ -22,6 +24,7 @@ const userStore = useUserStore()
           <RouterLink to="/films">Films</RouterLink>
           <RouterLink to="/a-propos">A propos</RouterLink>
           <RouterLink to="/login">Connexion</RouterLink>
+          <span v-if="cartStore.total > 0">Panier: {{ cartStore.total }}</span>
           <Button
             @click="userStore.fakeLogin('Fiorella')"
             v-if="!userStore.logged"

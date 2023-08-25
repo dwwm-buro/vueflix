@@ -4,6 +4,7 @@ import { getMovies } from '@/services/api'
 import Button from '@/components/Button.vue'
 import Loader from '@/components/Loader.vue'
 import MovieCard from '@/components/MovieCard.vue'
+import { useCartStore } from '@/stores/cart'
 
 const page = ref(1)
 const movies = ref([])
@@ -25,11 +26,19 @@ const loadMore = () => {
     }, 1500)
   })
 }
+
+const store = useCartStore()
 </script>
 
 <template>
   <div class="container">
     <h1 class="title">Films</h1>
+
+    <ul class="flex">
+      <li v-for="item in store.cart">
+        <img width="50" :src="item.movie.poster_path" :alt="item.movie.title" />
+      </li>
+    </ul>
 
     <div v-if="!loading || movies.length > 0">
       <div class="flex">
